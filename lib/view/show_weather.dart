@@ -16,21 +16,22 @@ class ShowWeather extends StatelessWidget {
       children: [
         Text(
           city.toString().titleCase,
-          style: const TextStyle(
-              fontSize: 30, fontWeight: FontWeight.w600, color: Colors.white),
+          style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
         ),
         const SizedBox(
-          height: 10,
+          height: 5,
+        ),
+        Text('${weatherForecast.weather[0].description}'),
+        const SizedBox(
+          height: 15,
         ),
         Text(
           "${weatherForecast.main.temp.round()} °C",
-          style: const TextStyle(
-              fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),
+          style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
         ),
         const Text(
           "Сейчас",
-          style: TextStyle(
-              fontSize: 18, fontWeight: FontWeight.w400, color: Colors.white),
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
         ),
         const SizedBox(
           height: 10,
@@ -41,36 +42,26 @@ class ShowWeather extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  "${weatherForecast.main.tempMin.round()} °C",
+                  "${weatherForecast.main.feelsLike.round()} °C",
                   style: const TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
+                      fontSize: 25, fontWeight: FontWeight.bold),
                 ),
                 const Text(
-                  "Мин.",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white),
+                  "Ощущается как",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
                 ),
               ],
             ),
             Column(
               children: [
                 Text(
-                  "${weatherForecast.main.tempMax.round()} °C",
+                  "${weatherForecast.wind.speed.round()} м/с",
                   style: const TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
+                      fontSize: 25, fontWeight: FontWeight.bold),
                 ),
                 const Text(
-                  "Макс.",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white),
+                  "Скорость ветра",
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
                 ),
               ],
             )
@@ -85,7 +76,7 @@ class ShowWeather extends StatelessWidget {
                   BlocProvider.of<WeatherBloc>(context).add(ResetWeather());
                 },
                 child: const Text(
-                  "Search Again",
+                  "Назад",
                   style: TextStyle(fontSize: 16),
                 )))
       ],

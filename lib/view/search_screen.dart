@@ -26,19 +26,20 @@ class _SearchScreenState extends State<SearchScreen> {
     final weatherBloc = BlocProvider.of<WeatherBloc>(context);
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        color: Color.fromARGB(221, 44, 44, 44),
+        color: const Color.fromARGB(221, 44, 44, 44),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
+            SizedBox(
               height: 200,
               width: 200,
               child: SvgPicture.asset(
                 assetName,
-                colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                colorFilter:
+                    const ColorFilter.mode(Colors.white, BlendMode.srcIn),
               ),
             ),
             const SizedBox(

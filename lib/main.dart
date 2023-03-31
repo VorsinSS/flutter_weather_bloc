@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
         hintColor: Colors.white,
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
+            elevation: 0,
             backgroundColor: const Color.fromARGB(255, 34, 34, 34),
             foregroundColor: Colors.white,
           ),
