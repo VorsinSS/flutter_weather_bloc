@@ -138,29 +138,29 @@ class _SearchScreenState extends State<SearchScreen> {
 _getWeatherIcon(String icon) {
   switch (icon) {
     case '01d':
-      return "assets/sun.png";
+      return "assets/sun.svg";
     case '01n':
-      return "assets/sun.png";
+      return "assets/sun.svg";
     case '02d':
     case '02n':
     case '03d':
     case '03n':
     case '04d':
     case '04n':
-      return "assets/cloudy.png";
+      return "assets/cloudy.svg";
     case '09d':
     case '09n':
     case '10d':
     case '10n':
-      return "assets/rainy.png";
+      return "assets/rainy.svg";
     case '11d':
     case '11n':
-      return "assets/storm-and-rain.png";
+      return "assets/stormy.svg";
     case '13d':
     case '13n':
-      return "assets/snieg.png";
+      return "assets/snowy.svg";
     case '50d':
     case '50n':
-      return "assets/mgla.png";
+      return "assets/mist.png";
   }
 }

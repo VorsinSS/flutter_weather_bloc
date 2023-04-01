@@ -62,12 +62,12 @@ class WeatherModel {
     data['wind'] = wind.toJson();
     data['rain'] = rain.toJson();
     data['clouds'] = clouds.toJson();
-    data['dt'] = dt;
+    data['dt'] = dt.toDouble();
     data['sys'] = sys.toJson();
-    data['timezone'] = timezone;
-    data['id'] = id;
+    data['timezone'] = timezone.toDouble();
+    data['id'] = id.toDouble();
     data['name'] = name;
-    data['cod'] = cod;
+    data['cod'] = cod.toDouble();
     return data;
   }
 }
@@ -119,7 +119,7 @@ class Weather {
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    data['id'] = id;
+    data['id'] = id.toDouble();
     data['main'] = main;
     data['description'] = description;
     data['icon'] = icon;
@@ -166,10 +166,10 @@ class Main {
     data['feels_like'] = feelsLike.toDouble();
     data['temp_min'] = tempMin.toDouble();
     data['temp_max'] = tempMax.toDouble();
-    data['pressure'] = pressure;
-    data['humidity'] = humidity;
-    data['sea_level'] = seaLevel;
-    data['grnd_level'] = grndLevel;
+    data['pressure'] = pressure.toDouble();
+    data['humidity'] = humidity.toDouble();
+    data['sea_level'] = seaLevel.toDouble();
+    data['grnd_level'] = grndLevel.toDouble();
     return data;
   }
 }
@@ -181,13 +181,13 @@ class Wind {
     required this.gust,
   });
 
-  final double speed;
+  final int speed;
   final int deg;
   final double gust;
 
   static Wind fromJson(Map<String, dynamic> json) {
     return Wind(
-      speed: json['speed'] ?? 0.0,
+      speed: json['speed'] ?? 0,
       deg: json['deg'] ?? 0,
       gust: json['gust'] ?? 0.0,
     );
@@ -265,11 +265,11 @@ class Sys {
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
-    data['type'] = type;
-    data['id'] = id;
+    data['type'] = type.toDouble();
+    data['id'] = id.toDouble();
     data['country'] = country;
-    data['sunrise'] = sunrise;
-    data['sunset'] = sunset;
+    data['sunrise'] = sunrise.toDouble();
+    data['sunset'] = sunset.toDouble();
     return data;
   }
 }
