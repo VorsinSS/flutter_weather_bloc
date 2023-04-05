@@ -78,8 +78,8 @@ class Coord {
     required this.lat,
   });
 
-  final double lon;
-  final double lat;
+  final num lon;
+  final num lat;
 
   static Coord fromJson(Map<String, dynamic> json) {
     return Coord(
@@ -104,7 +104,7 @@ class Weather {
     required this.icon,
   });
 
-  final int id;
+  final num id;
   final String main;
   final String description;
   final String icon;
@@ -139,14 +139,14 @@ class Main {
     required this.grndLevel,
   });
 
-  final double temp;
-  final double feelsLike;
-  final double tempMin;
-  final double tempMax;
-  final int pressure;
-  final int humidity;
-  final int seaLevel;
-  final int grndLevel;
+  final num temp;
+  final num feelsLike;
+  final num tempMin;
+  final num tempMax;
+  final num pressure;
+  final num humidity;
+  final num seaLevel;
+  final num grndLevel;
 
   static Main fromJson(Map<String, dynamic> json) {
     return Main(
@@ -181,9 +181,9 @@ class Wind {
     required this.gust,
   });
 
-  final int speed;
-  final int deg;
-  final double gust;
+  final num speed;
+  final num deg;
+  final num gust;
 
   static Wind fromJson(Map<String, dynamic> json) {
     return Wind(
@@ -207,7 +207,7 @@ class Rain {
     required this.hour,
   });
 
-  final double hour;
+  final num hour;
 
   static Rain fromJson(Map<String, dynamic>? json) {
     return Rain(hour: json?['1h'] ?? 0.0);
@@ -225,7 +225,7 @@ class Clouds {
     required this.all,
   });
 
-  final int all;
+  final num all;
 
   static Clouds fromJson(Map<String, dynamic> json) {
     return Clouds(all: json['all'] ?? 0);
@@ -247,11 +247,11 @@ class Sys {
     required this.sunset,
   });
 
-  final int type;
-  final int id;
+  final num type;
+  final num id;
   final String country;
-  final int sunrise;
-  final int sunset;
+  final num sunrise;
+  final num sunset;
 
   static Sys fromJson(Map<String, dynamic> json) {
     return Sys(
