@@ -15,7 +15,8 @@ class ShowWeather extends StatelessWidget {
     return Column(
       children: [
         Text(
-          city.toString().titleCase,
+          // city.toString().titleCase,
+          weatherForecast.name,
           style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
         ),
         const SizedBox(

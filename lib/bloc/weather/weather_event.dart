@@ -7,11 +7,13 @@ abstract class WeatherEvent extends Equatable {
 }
 
 class FetchWeather extends WeatherEvent {
-  final _city;
+  final String cityTitle;
 
-  FetchWeather(this._city);
+  FetchWeather(this.cityTitle);
   @override
-  List<Object?> get props => [_city];
+  List<Object?> get props => [cityTitle];
 }
 
 class ResetWeather extends WeatherEvent {}
+
+class FetchLocation extends WeatherEvent {}

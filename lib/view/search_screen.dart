@@ -37,12 +37,13 @@ class _SearchScreenState extends State<SearchScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               BlocBuilder<WeatherBloc, WeatherState>(builder: (context, state) {
-                if (state is WeatherLoaded) {
+                final data = state.data;
+                if (data != null) {
                   return SizedBox(
                       height: 200,
                       width: 200,
                       child: SvgPicture.asset(
-                          _getWeatherIcon(state.getWeather.weather[0].icon),
+                          _getWeatherIcon(data.weather[0].icon),
                           colorFilter: const ColorFilter.mode(
                               Colors.white, BlendMode.srcIn)));
                 } else {
@@ -63,7 +64,8 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               BlocBuilder<WeatherBloc, WeatherState>(
                 builder: (context, state) {
-                  if (state is WeatherNotSearched) {
+                  final data = state.data;
+                  if (data == null) {
                     return Column(
                       children: [
                         const Text(
@@ -80,33 +82,46 @@ class _SearchScreenState extends State<SearchScreen> {
                           padding: const EdgeInsets.symmetric(vertical: 20),
                           child: SizedBox(
                             height: 40,
-                            child: TextFormField(
-                              onFieldSubmitted: (value) => weatherBloc.add(
-                                  FetchWeather(
-                                      weatherController.text.toString())),
-                              controller: weatherController,
-                              decoration: const InputDecoration(
-                                filled: true,
-                                fillColor: Color.fromARGB(255, 100, 100, 100),
-                                prefixIcon: Icon(
-                                  Icons.search,
-                                  color: Colors.white,
-                                ),
-                                hintText: "Город",
-                                contentPadding:
-                                    const EdgeInsets.symmetric(vertical: 10),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(style: BorderStyle.none),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(18))),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(18)),
-                                    borderSide:
-                                        BorderSide(style: BorderStyle.none)),
-                              ),
-                            ),
+                            child: Stack(
+                                alignment: Alignment.centerRight,
+                                children: [
+                                  TextFormField(
+                                    onFieldSubmitted: (value) =>
+                                        weatherBloc.add(FetchWeather(
+                                            weatherController.text.toString())),
+                                    controller: weatherController,
+                                    decoration: const InputDecoration(
+                                      filled: true,
+                                      fillColor:
+                                          Color.fromARGB(255, 100, 100, 100),
+                                      prefixIcon: Icon(
+                                        Icons.search,
+                                        color: Colors.white,
+                                      ),
+                                      hintText: "Город",
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                              vertical: 10),
+                                      enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                              style: BorderStyle.none),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(18))),
+                                      focusedBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(18)),
+                                          borderSide: BorderSide(
+                                              style: BorderStyle.none)),
+                                    ),
+                                  ),
+                                  IconButton(
+                                    onPressed: (() {
+                                      weatherBloc.add(FetchLocation());
+                                    }),
+                                    icon: const Icon(Icons.my_location_rounded),
+                                    color: Colors.white,
+                                  ),
+                                ]),
                           ),
                         ),
                         SizedBox(
@@ -128,18 +143,18 @@ class _SearchScreenState extends State<SearchScreen> {
                                 ))),
                       ],
                     );
-                  } else if (state is WeatherLoading) {
+                  } else if (state.isLoading) {
                     return const Center(
                       child: CircularProgressIndicator(
                         color: Colors.white,
                       ),
                     );
-                  } else if (state is WeatherLoaded) {
-                    return ShowWeather(
-                        weatherForecast: state.getWeather,
-                        city: weatherController.text.toString());
-                  } else {
+                  } else if (state.error != null) {
                     return const Text("Error");
+                  } else {
+                    return ShowWeather(
+                        weatherForecast: data,
+                        city: weatherController.text.toString());
                   }
                 },
               ),
@@ -180,26 +195,3 @@ _getWeatherIcon(String icon) {
       return "assets/mist.png";
   }
 }
-
-
-// Container(
-//           padding: const EdgeInsets.symmetric(horizontal: 20),
-//           height: MediaQuery.of(context).size.height,
-//           width: MediaQuery.of(context).size.width,
-//           color: const Color.fromARGB(221, 44, 44, 44),
-//           child: Column(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children: [
-//               SizedBox(
-//                 height: 200,
-//                 width: 200,
-//                 child: SvgPicture.asset(
-//                   assetName,
-//                   colorFilter:
-//                       const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-//                 ),
-//               ),
-//               const SizedBox(
-//                 height: 113,
-//                 width: 135,
-//               ),
